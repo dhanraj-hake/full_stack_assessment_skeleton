@@ -129,7 +129,26 @@ docker-compose -f docker-compose.initial.yml up --build -d
 
 ### solution
 
-> explain briefly your solution for this problem here
+> 
+
+The provided SQL script refactors the existing database schema to achieve a normalized structure. This normalization involves creating separate tables for users and homes and defining a many-to-many relationship between them.
+
+### Schema Changes
+
+- **`user` Table**: Stores user information with `username` as the primary key.
+- **`home` Table**: Stores home information with `street_address` as the primary key.
+- **`user_home_mapping` Table**: Represents the many-to-many relationship between users and homes.
+
+### SQL Script
+
+The SQL script `99_final_db_dump.sql` performs the following actions:
+
+- Drops existing tables (`user`, `home`, `user_home_mapping`) if they exist.
+- Creates a new `user` table with attributes `username` and `email`.
+- Creates a new `home` table with attributes such as `street_address`, `state`, `zip`, `sqft`, `beds`, `baths`, and `list_price`.
+- Creates a `user_home_mapping` table to link users and homes with foreign keys and a composite primary key.
+- Insert some records into the `user`, `home` and  `user_home_mapping` tables in script. I have added onlly 20 records in the script.
+
 
 ## 2. React SPA
 
@@ -220,7 +239,63 @@ docker-compose -f docker-compose.initial.yml up --build -d
 
 ### solution
 
-> explain briefly your solution for this problem here
+>
+
+
+I have created a Vite React application featuring user and home management components. The application includes three primary components: `Home`, `HomeCard`, and `EditUserModal`.
+
+### Components
+
+### `Home`
+- **Functionality**: Implements the functionality to select a user and list home cards associated with that user.
+- **Features**: 
+  - Allows the selection of a user from a dropdown menu.
+  - Fetches and displays home cards relevant to the selected user.
+
+### `HomeCard`
+- **Functionality**: Displays detailed information about a home.
+- **Features**: 
+  - Shows attributes such as street address, state, zip code, square footage, number of beds and baths, and list price.
+
+### `EditUserModal`
+- **Functionality**: Provides a modal for editing user information related to a home.
+- **Features**: 
+  - Allows editing of user details and associates these changes with a home.
+
+### Libraries Used
+
+- **Tailwind CSS**: Used for styling the components, providing a responsive design.
+- **Redux Toolkit**: Manages the state of the application 
+- **RTK Query**: Handles data fetching and caching for efficient data management.
+- **React Loading Skeleton**: Shows loading placeholders while data is being fetched, enhancing user experience.
+
+### Setup
+
+
+1.  **Navigate into the project directory**
+    ```bash
+    cd frontend
+    ```
+
+1. **Install Dependencies**: Run the following command to install the required dependencies:
+
+    ```bash
+    npm install
+    ```
+
+2. **Start the Development Server**: Launch the Vite development server with:
+
+    ```bash
+    npm run dev
+    ```
+
+3. **Build for Production**: Create a production build of the application with:
+
+    ```bash
+    npm run build
+    ```
+
+
 
 ## 3. Backend API development on Node
 
@@ -281,7 +356,53 @@ docker-compose -f docker-compose.initial.yml up --build -d
 
 ### solution
 
-> explain briefly your solution for this problem here
+>
+
+
+This project provides REST APIs for managing users and homes using Node.js, TypeScript, Express, and MySQL with TypeORM. The APIs are designed to handle user and home data as specified in the task requirements.
+
+### APIs
+
+### `/user/find-all`
+-  Returns all users from the database.
+
+### `/home/find-by-user`
+- Returns all homes related to a user. 
+
+### `/user/find-by-home`
+- Returns all users related to a home.
+
+### `/home/update-users`
+- Takes in a new set of users for home and update in database
+
+
+## Setup
+
+1. **Navigate into the project directory**
+    ```bash
+    cd backend
+    ```
+
+   
+2. **Install Dependencies**
+
+    ```bash
+    npm install
+    ```
+
+3. **Start the Server**
+
+    ```bash
+    npm run dev
+    ```
+
+4. **Build for Production**
+
+    ```bash
+    npm run build
+    ```
+
+  
 
 ## Submission Guidelines
 
